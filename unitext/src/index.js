@@ -3,23 +3,41 @@ import { createRoot } from "react-dom/client";
 import {
   createBrowserRouter,
   RouterProvider,
-  Route,
+  routes,
   Link,
+  Outlet,
 } from "react-router-dom";
+
+import Notes from "./routes/Notes";
+import Notes1 from "./routes/Notes1";
+import Home from "./routes/Home";
+import Navbar from "./components/Navbar";
+import "./App.css";
+
+const AppLayout = () => (
+  <>
+  <Navbar />
+  <Outlet />
+  </>
+);
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: (
-      <div>
-        <h1>Hello World</h1>
-        <Link to="about">About Us</Link>
-      </div>
-    ),
-  },
-  {
-    path: "about",
-    element: <div>About</div>,
+    element: <AppLayout />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "notes",
+        element: <Notes />,
+      },
+      {
+        path: "notes1",
+        element: <Notes1 />,
+      },
+    ],
   },
 ]);
 
